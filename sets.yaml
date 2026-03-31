@@ -1,0 +1,303 @@
+sets:
+
+  # ==========================================================
+  # POKEMON - NEWEST ENGLISH SETS (PRIORITIZED FIRST)
+  # ==========================================================
+
+  - name: "Scarlet & Violet - Mega Evolution"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "mega evolution"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Bundle"
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+  - name: "Scarlet & Violet - Phantasmal Flames"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "phantasmal flames"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Bundle"
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+  - name: "Scarlet & Violet - Destined Rivals"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "destined rivals"
+      - "team rocket"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Bundle"
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+  - name: "Prismatic Evolutions"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "prismatic evolutions"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Bundle"
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+  - name: "Scarlet & Violet - 151"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "scarlet & violet 151"
+      - "sv151"
+      - "151 booster bundle"
+      - "151 booster box"
+      - "151"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Bundle"
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+
+  # ==========================================================
+  # POKEMON - JAPANESE
+  # ==========================================================
+
+  - name: "Terastal Festival ex"
+    franchise: "Pokemon"
+    region: "JP"
+    keywords:
+      - "terastal festival ex"
+      - "terastal festival"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 30
+
+  - name: "Stellar Miracle"
+    franchise: "Pokemon"
+    region: "JP"
+    keywords:
+      - "stellar miracle"
+      - "sv7"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 30
+
+  - name: "VSTAR Universe"
+    franchise: "Pokemon"
+    region: "JP"
+    keywords:
+      - "vstar universe"
+      - "s12a"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 30
+
+
+  # ==========================================================
+  # POKEMON - CHINESE (ALLOWED EXCEPTIONS)
+  # ==========================================================
+
+  - name: "Pokemon 151 (Chinese)"
+    franchise: "Pokemon"
+    region: "CN"
+    keywords:
+      - "chinese 151"
+      - "151 chinese"
+      - "pokemon 151 chinese"
+      - "chinese pokemon 151"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 30
+
+  - name: "Pokemon GEM (Chinese)"
+    franchise: "Pokemon"
+    region: "CN"
+    keywords:
+      - "chinese gem"
+      - "pokemon gem"
+      - "gem chinese"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 30
+
+  - name: "Pokemon 9 Colors Gathering (Chinese)"
+    franchise: "Pokemon"
+    region: "CN"
+    keywords:
+      - "9 colors gathering"
+      - "nine colors gathering"
+      - "chinese 9 colors"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 30
+
+
+  # ==========================================================
+  # ONE PIECE - MAIN BOOSTER (OP SERIES)
+  # ==========================================================
+
+  - name: "One Piece - OP-01 Romance Dawn"
+    franchise: "One Piece"
+    region: "JP"
+    keywords:
+      - "op-01"
+      - "romance dawn"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 24
+
+  - name: "One Piece - OP-02 Paramount War"
+    franchise: "One Piece"
+    region: "JP"
+    keywords:
+      - "op-02"
+      - "paramount war"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 24
+
+  - name: "One Piece - OP-03 Pillars of Strength"
+    franchise: "One Piece"
+    region: "JP"
+    keywords:
+      - "op-03"
+      - "pillars of strength"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 24
+
+  - name: "One Piece - OP-04 Kingdoms of Intrigue"
+    franchise: "One Piece"
+    region: "JP"
+    keywords:
+      - "op-04"
+      - "kingdoms of intrigue"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 24
+
+  - name: "One Piece - OP-05 Awakening of the New Era"
+    franchise: "One Piece"
+    region: "JP"
+    keywords:
+      - "op-05"
+      - "awakening of the new era"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 24
+
+  - name: "One Piece - OP-06 Wings of the Captain"
+    franchise: "One Piece"
+    region: "JP"
+    keywords:
+      - "op-06"
+      - "wings of the captain"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 24
+
+
+  # ==========================================================
+  # ONE PIECE - EXTRA BOOSTER (EB)
+  # ==========================================================
+
+  - name: "One Piece - EB-01 Memorial Collection"
+    franchise: "One Piece"
+    region: "JP"
+    keywords:
+      - "eb-01"
+      - "memorial collection"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 24
+
+  - name: "One Piece - EB-02 Anime 25th Collection"
+    franchise: "One Piece"
+    region: "JP"
+    keywords:
+      - "eb-02"
+      - "anime 25th collection"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 24
+
+  - name: "One Piece - EB-03 Heroines Edition"
+    franchise: "One Piece"
+    region: "JP"
+    keywords:
+      - "eb-03"
+      - "heroines edition"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 24
+
+  - name: "One Piece - EB-04 Egghead Crisis"
+    franchise: "One Piece"
+    region: "JP"
+    keywords:
+      - "eb-04"
+      - "egghead crisis"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 24
+
+
+  # ==========================================================
+  # ONE PIECE - PREMIUM BOOSTER (PRB)
+  # ==========================================================
+
+  - name: "One Piece - PRB-01 One Piece Card The Best"
+    franchise: "One Piece"
+    region: "JP"
+    keywords:
+      - "prb-01"
+      - "one piece card the best"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 24
+
+  - name: "One Piece - PRB-02 One Piece Card The Best Vol.2"
+    franchise: "One Piece"
+    region: "JP"
+    keywords:
+      - "prb-02"
+      - "card the best vol.2"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 24
+

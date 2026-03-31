@@ -1,0 +1,138 @@
+global:
+  timeout_seconds: 25
+  max_retries: 3
+
+  # Scraping etiquette & stability
+  respect_robots_txt: true        # set to false if a site blocks via robots.txt
+  cache_ttl_seconds: 900          # 15 minutes in-memory cache
+  max_urls_per_site: 250          # hard cap to prevent runaway discovery
+
+  user_agents:
+    - "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0 Safari/537.36"
+    - "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+    - "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0 Safari/537.36"
+
+sites:
+
+  # ----------------------------
+  # SAKURAS CARD SHOP
+  # Variant-aware (sealed box / sealed case / no shrink)
+  # ----------------------------
+  - name: "Sakuras Card Shop"
+    mode: "shopify_collection"
+    shopify_js_fallback: true
+    throttle_seconds: 2.5
+    currency: "USD"
+
+    shipping:
+      type: "unknown"
+
+    collection_pages:
+      - "https://sakurascardshop.com/collections/all"
+    max_collection_pages: 3
+
+
+  # ----------------------------
+  # DOTS CARD SHOP
+  # ----------------------------
+  - name: "Dots Card Shop"
+    mode: "shopify_collection"
+    shopify_js_fallback: true
+    throttle_seconds: 2.2
+    currency: "USD"
+
+    shipping:
+      type: "unknown"
+
+    collection_pages:
+      - "https://dotscardshop.com/collections/all"
+    max_collection_pages: 3
+
+
+  # ----------------------------
+  # GRANDADS CARDS
+  # ----------------------------
+  - name: "Grandads Cards"
+    mode: "shopify_collection"
+    shopify_js_fallback: true
+    throttle_seconds: 2.2
+    currency: "USD"
+
+    shipping:
+      type: "unknown"
+
+    collection_pages:
+      - "https://grandadscards.shop/collections/all"
+    max_collection_pages: 3
+
+
+  # ----------------------------
+  # SAFARI ZONE
+  # ----------------------------
+  - name: "Safari Zone"
+    mode: "shopify_collection"
+    shopify_js_fallback: true
+    throttle_seconds: 2.0
+    currency: "USD"
+
+    shipping:
+      type: "unknown"
+
+    collection_pages:
+      - "https://safari-zone.com/collections/all"
+    max_collection_pages: 3
+
+
+  # ----------------------------
+  # TCG STADIUM
+  # ----------------------------
+  - name: "TCG Stadium"
+    mode: "shopify_collection"
+    shopify_js_fallback: true
+    throttle_seconds: 2.0
+    currency: "USD"
+
+    shipping:
+      type: "unknown"
+
+    collection_pages:
+      - "https://tcg-stadium.com/collections/english-sealed-products"
+      - "https://tcg-stadium.com/collections/sealed-products"
+    max_collection_pages: 3
+
+
+  # ----------------------------
+  # FLIPSIDE GAMING
+  # ----------------------------
+  - name: "Flipside Gaming"
+    mode: "shopify_collection"
+    shopify_js_fallback: false   # not Shopify; HTML fallback only
+    throttle_seconds: 2.0
+    currency: "USD"
+
+    shipping:
+      type: "unknown"
+
+    collection_pages:
+      - "https://flipsidegaming.com/collections/pokemon-sealed"
+      - "https://flipsidegaming.com/collections/sealed-product"
+    max_collection_pages: 3
+
+
+  # ----------------------------
+  # POKEMON PLUG
+  # ----------------------------
+  - name: "PokemonPlug"
+    mode: "shopify_collection"
+    shopify_js_fallback: true
+    throttle_seconds: 2.0
+    currency: "USD"
+
+    shipping:
+      type: "unknown"
+
+    collection_pages:
+      - "https://pokemonplug.com/collections/view-all-sealed-pokemon-products-in-stock"
+      - "https://pokemonplug.com/collections/sealed-products"
+    max_collection_pages: 3
+
