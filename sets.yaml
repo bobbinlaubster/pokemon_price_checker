@@ -86,7 +86,6 @@ sets:
     keywords:
       - "scarlet & violet destined rivals"
       - "destined rivals"
-      - "team rocket"
     allowed_product_types:
       - "Booster Box"
       - "Booster Bundle"
@@ -214,6 +213,17 @@ sets:
     keywords:
       - "terastal festival ex"
       - "terastal festival"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Pack"
+    default_booster_box_packs: 30
+
+  - name: "Glory of Team Rocket"
+    franchise: "Pokemon"
+    region: "JP"
+    keywords:
+      - "glory of team rocket"
+      - "team rocket glory"
     allowed_product_types:
       - "Booster Box"
       - "Booster Pack"

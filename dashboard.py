@@ -2,7 +2,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from src.dashboard_data import build_best_price_table, load_snapshot
+from src.dashboard_data import build_best_price_table, build_tracked_sets_table, load_snapshot
 
 
 st.set_page_config(page_title="PriceChecker Dashboard", layout="wide")
@@ -21,6 +21,7 @@ if not snapshot_path.exists():
 
 snapshot_df = load_snapshot(str(snapshot_path))
 best_df = build_best_price_table(str(snapshot_path), str(sets_path))
+tracked_sets_df = build_tracked_sets_table(str(snapshot_path), str(sets_path))
 
 franchises = ["All"]
 if not snapshot_df.empty and "franchise" in snapshot_df.columns:
@@ -39,10 +40,40 @@ filtered_best = best_df.copy()
 if selected_franchise != "All" and not filtered_best.empty and "franchise" in filtered_best.columns:
     filtered_best = filtered_best[filtered_best["franchise"] == selected_franchise]
 
+filtered_tracked_sets = tracked_sets_df.copy()
+if selected_franchise != "All" and not filtered_tracked_sets.empty and "franchise" in filtered_tracked_sets.columns:
+    filtered_tracked_sets = filtered_tracked_sets[filtered_tracked_sets["franchise"] == selected_franchise]
+
 metric_cols = st.columns(3)
 metric_cols[0].metric("Offers", int(len(filtered_snapshot.index)))
 metric_cols[1].metric("Best Rows", int(len(filtered_best.index)))
 metric_cols[2].metric("Sites", int(filtered_snapshot["site_name"].nunique()) if not filtered_snapshot.empty else 0)
+
+st.subheader("Tracked Sets Best Price per Pack")
+if filtered_tracked_sets.empty:
+    st.info("No tracked sets are available for the current filters.")
+else:
+    st.dataframe(
+        filtered_tracked_sets[
+            [
+                "franchise",
+                "region",
+                "set_name",
+                "tracked_product_types",
+                "best_product_type",
+                "best_site",
+                "best_price_per_pack",
+                "market_price",
+                "delta_vs_market",
+                "best_url",
+            ]
+        ],
+        width="stretch",
+        hide_index=True,
+        column_config={
+            "best_url": st.column_config.LinkColumn("Buy Link", display_text="Open"),
+        },
+    )
 
 st.subheader("Best Price by Set")
 if filtered_best.empty:
@@ -52,6 +83,7 @@ else:
         filtered_best[
             [
                 "franchise",
+                "region",
                 "set_name",
                 "product_type",
                 "best_site",
