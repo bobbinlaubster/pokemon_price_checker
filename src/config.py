@@ -8,8 +8,6 @@ class GlobalSettings:
     timeout_seconds: int
     max_retries: int
     user_agents: List[str]
-
-    # Etiquette + stability defaults
     respect_robots_txt: bool
     cache_ttl_seconds: int
     max_urls_per_site: int
@@ -17,7 +15,7 @@ class GlobalSettings:
 
 @dataclass
 class ShippingRule:
-    type: str = "unknown"  # unknown | flat | free_over
+    type: str = "unknown"
     flat_amount: Optional[float] = None
     free_over: Optional[float] = None
 
@@ -28,17 +26,11 @@ class SiteConfig:
     mode: str
     throttle_seconds: float
     currency: str
-
+    adapter: str
     shopify_js_fallback: bool
-
-    # Collection crawling
     collection_pages: List[str]
     max_collection_pages: int
-
-    # Optional product-title blocklist to reduce noisy sealed-adjacent results.
     title_exclude_keywords: List[str]
-
-    # Shipping model (optional)
     shipping: ShippingRule
 
 
@@ -70,12 +62,14 @@ def load_config(path: str) -> AppConfig:
     sites: List[SiteConfig] = []
     for s in data.get("sites", []) or []:
         ship = s.get("shipping", {}) or {}
+        mode = str(s["mode"]).lower().strip()
         sites.append(
             SiteConfig(
                 name=str(s["name"]).strip(),
-                mode=str(s["mode"]).lower().strip(),
+                mode=mode,
                 throttle_seconds=float(_get(s, "throttle_seconds", 2.0)),
                 currency=str(_get(s, "currency", "USD")).strip(),
+                adapter=str(_get(s, "adapter", mode)).strip().lower(),
                 shopify_js_fallback=bool(_get(s, "shopify_js_fallback", False)),
                 collection_pages=list(_get(s, "collection_pages", [])),
                 max_collection_pages=int(_get(s, "max_collection_pages", 3)),

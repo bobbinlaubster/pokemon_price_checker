@@ -14,141 +14,101 @@ global:
 
 sites:
 
-  # ----------------------------
-  # SAKURAS CARD SHOP
-  # Variant-aware (sealed box / sealed case / no shrink)
-  # ----------------------------
   - name: "Sakuras Card Shop"
     mode: "shopify_collection"
+    adapter: "sakuras"
     shopify_js_fallback: true
     throttle_seconds: 2.5
     currency: "USD"
-
     shipping:
       type: "unknown"
-
     collection_pages:
       - "https://sakurascardshop.com/collections/all"
     max_collection_pages: 3
 
-
-  # ----------------------------
-  # DOTS CARD SHOP
-  # ----------------------------
   - name: "Dots Card Shop"
     mode: "shopify_collection"
+    adapter: "shopify_collection"
     shopify_js_fallback: true
     throttle_seconds: 2.2
     currency: "USD"
-
     shipping:
       type: "unknown"
-
     collection_pages:
       - "https://dotscardshop.com/collections/all"
     max_collection_pages: 3
 
-
-  # ----------------------------
-  # GRANDADS CARDS
-  # ----------------------------
   - name: "Grandads Cards"
     mode: "shopify_collection"
+    adapter: "shopify_collection"
     shopify_js_fallback: true
     throttle_seconds: 2.2
     currency: "USD"
-
     shipping:
       type: "unknown"
-
     collection_pages:
       - "https://grandadscards.shop/collections/all"
     max_collection_pages: 3
 
-
-  # ----------------------------
-  # SAFARI ZONE
-  # ----------------------------
   - name: "Safari Zone"
     mode: "shopify_collection"
+    adapter: "shopify_collection"
     shopify_js_fallback: true
     throttle_seconds: 2.0
     currency: "USD"
-
     shipping:
       type: "unknown"
-
     collection_pages:
       - "https://safari-zone.com/collections/all"
     max_collection_pages: 3
 
-
-  # ----------------------------
-  # TCG STADIUM
-  # ----------------------------
   - name: "TCG Stadium"
     mode: "shopify_collection"
+    adapter: "shopify_collection"
     shopify_js_fallback: true
     throttle_seconds: 2.0
     currency: "USD"
-
     shipping:
       type: "unknown"
-
     collection_pages:
       - "https://tcg-stadium.com/collections/english-sealed-products"
       - "https://tcg-stadium.com/collections/sealed-products"
     max_collection_pages: 3
 
-
-  # ----------------------------
-  # FLIPSIDE GAMING
-  # ----------------------------
   - name: "Flipside Gaming"
     mode: "shopify_collection"
-    shopify_js_fallback: false   # not Shopify; HTML fallback only
+    adapter: "shopify_collection"
+    shopify_js_fallback: false
     throttle_seconds: 2.0
     currency: "USD"
-
     shipping:
       type: "unknown"
-
     collection_pages:
       - "https://flipsidegaming.com/collections/pokemon-sealed"
       - "https://flipsidegaming.com/collections/sealed-product"
     max_collection_pages: 3
 
-
-  # ----------------------------
-  # POKEMON PLUG
-  # ----------------------------
   - name: "PokemonPlug"
     mode: "shopify_collection"
+    adapter: "shopify_collection"
     shopify_js_fallback: true
     throttle_seconds: 2.0
     currency: "USD"
-
     shipping:
       type: "unknown"
-
     collection_pages:
       - "https://pokemonplug.com/collections/view-all-sealed-pokemon-products-in-stock"
       - "https://pokemonplug.com/collections/sealed-products"
     max_collection_pages: 3
 
-
-  # ----------------------------
-  # PACK FRESH
-  # ----------------------------
   - name: "Pack Fresh"
     mode: "shopify_collection"
+    adapter: "shopify_collection"
     shopify_js_fallback: true
     throttle_seconds: 2.2
     currency: "USD"
-
     shipping:
       type: "unknown"
-
     title_exclude_keywords:
       - "premium collection"
       - "ultra premium"
@@ -164,25 +124,19 @@ sites:
       - "mini tin"
       - "accessory pouch"
       - "surprise box"
-
     collection_pages:
       - "https://pack-fresh.com/collections/pokemon"
       - "https://pack-fresh.com/collections/one-piece"
     max_collection_pages: 3
 
-
-  # ----------------------------
-  # NOVA BREAK
-  # ----------------------------
   - name: "Nova Break"
     mode: "shopify_collection"
+    adapter: "shopify_collection"
     shopify_js_fallback: true
     throttle_seconds: 2.2
     currency: "USD"
-
     shipping:
       type: "unknown"
-
     title_exclude_keywords:
       - "premium collection"
       - "ultra premium"
@@ -199,7 +153,6 @@ sites:
       - "mini tin"
       - "accessory pouch"
       - "surprise box"
-
     collection_pages:
       - "https://novabreak.com/collections/pokemon"
       - "https://novabreak.com/collections/one-piece"
