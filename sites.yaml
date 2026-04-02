@@ -136,3 +136,38 @@ sites:
       - "https://pokemonplug.com/collections/sealed-products"
     max_collection_pages: 3
 
+
+  # ----------------------------
+  # PACK FRESH
+  # ----------------------------
+  - name: "Pack Fresh"
+    mode: "shopify_collection"
+    shopify_js_fallback: true
+    throttle_seconds: 2.2
+    currency: "USD"
+
+    shipping:
+      type: "unknown"
+
+    collection_pages:
+      - "https://pack-fresh.com/collections/pokemon"
+      - "https://pack-fresh.com/collections/one-piece"
+    max_collection_pages: 3
+
+
+  # ----------------------------
+  # NOVA BREAK
+  # ----------------------------
+  - name: "Nova Break"
+    mode: "shopify_collection"
+    shopify_js_fallback: true
+    throttle_seconds: 2.2
+    currency: "USD"
+
+    shipping:
+      type: "unknown"
+
+    collection_pages:
+      - "https://novabreak.com/collections/trading-card-games"
+      - "https://novabreak.com/collections/one-piece"
+    max_collection_pages: 3

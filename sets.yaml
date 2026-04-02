@@ -1,30 +1,80 @@
 sets:
 
   # ==========================================================
-  # POKEMON - NEWEST ENGLISH SETS (PRIORITIZED FIRST)
+  # POKEMON - CURRENT ENGLISH SETS (CONFIRMED AS OF 2026-04-02)
+  # Official sources cross-checked from Pokemon.com / press.pokemon.com.
+  # Keep more specific Mega Evolution subsets ahead of the base set so
+  # matching prefers the exact release when titles include both phrases.
   # ==========================================================
 
-  - name: "Scarlet & Violet - Mega Evolution"
+  - name: "Mega Evolution - Perfect Order"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "mega evolution perfect order"
+      - "perfect order"
+    allowed_product_types:
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+  - name: "Mega Evolution - Ascended Heroes"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "mega evolution ascended heroes"
+      - "ascended heroes"
+    allowed_product_types:
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+  - name: "Mega Evolution - Phantasmal Flames"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "mega evolution phantasmal flames"
+      - "phantasmal flames"
+    allowed_product_types:
+      - "Booster Box"
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+  - name: "Mega Evolution"
     franchise: "Pokemon"
     region: "EN"
     keywords:
       - "mega evolution"
     allowed_product_types:
       - "Booster Box"
-      - "Booster Bundle"
       - "ETB"
       - "Booster Pack"
     default_booster_box_packs: 36
     default_bundle_packs: 6
 
-  - name: "Scarlet & Violet - Phantasmal Flames"
+  - name: "Scarlet & Violet - Black Bolt"
     franchise: "Pokemon"
     region: "EN"
     keywords:
-      - "phantasmal flames"
+      - "scarlet & violet black bolt"
+      - "black bolt"
     allowed_product_types:
-      - "Booster Box"
-      - "Booster Bundle"
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+  - name: "Scarlet & Violet - White Flare"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "scarlet & violet white flare"
+      - "white flare"
+    allowed_product_types:
       - "ETB"
       - "Booster Pack"
     default_booster_box_packs: 36
@@ -34,8 +84,23 @@ sets:
     franchise: "Pokemon"
     region: "EN"
     keywords:
+      - "scarlet & violet destined rivals"
       - "destined rivals"
       - "team rocket"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Bundle"
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+  - name: "Scarlet & Violet - Journey Together"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "scarlet & violet journey together"
+      - "journey together"
     allowed_product_types:
       - "Booster Box"
       - "Booster Bundle"
@@ -50,6 +115,72 @@ sets:
     keywords:
       - "prismatic evolutions"
     allowed_product_types:
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+  - name: "Scarlet & Violet - Surging Sparks"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "scarlet & violet surging sparks"
+      - "surging sparks"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Bundle"
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+  - name: "Scarlet & Violet - Stellar Crown"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "scarlet & violet stellar crown"
+      - "stellar crown"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Bundle"
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+  - name: "Scarlet & Violet - Shrouded Fable"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "scarlet & violet shrouded fable"
+      - "shrouded fable"
+    allowed_product_types:
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+  - name: "Scarlet & Violet - Twilight Masquerade"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "scarlet & violet twilight masquerade"
+      - "twilight masquerade"
+    allowed_product_types:
+      - "Booster Box"
+      - "Booster Bundle"
+      - "ETB"
+      - "Booster Pack"
+    default_booster_box_packs: 36
+    default_bundle_packs: 6
+
+  - name: "Scarlet & Violet - Temporal Forces"
+    franchise: "Pokemon"
+    region: "EN"
+    keywords:
+      - "scarlet & violet temporal forces"
+      - "temporal forces"
+    allowed_product_types:
       - "Booster Box"
       - "Booster Bundle"
       - "ETB"
@@ -62,12 +193,10 @@ sets:
     region: "EN"
     keywords:
       - "scarlet & violet 151"
-      - "sv151"
       - "151 booster bundle"
-      - "151 booster box"
       - "151"
+      - "sv151"
     allowed_product_types:
-      - "Booster Box"
       - "Booster Bundle"
       - "ETB"
       - "Booster Pack"
@@ -300,4 +429,3 @@ sets:
       - "Booster Box"
       - "Booster Pack"
     default_booster_box_packs: 24
-
