@@ -4,7 +4,7 @@ from types import SimpleNamespace
 from src.config import load_config
 from src.site_adapters.dots import DotsAdapter
 from src.site_adapters.flipside_gaming import FlipsideGamingAdapter
-from src.site_adapters.generic_shopify import GenericShopifyCollectionAdapter
+from src.site_adapters.generic_shopify import BaseGenericShopifySiteAdapter, GenericShopifyCollectionAdapter
 from src.site_adapters.grandads import GrandadsAdapter
 from src.site_adapters.nova_break import NovaBreakAdapter
 from src.site_adapters.pack_fresh import PackFreshAdapter
@@ -117,3 +117,25 @@ def test_title_excluded_uses_site_keywords_case_insensitively():
     site = SimpleNamespace(title_exclude_keywords=["premium collection", "starter deck"])
     assert title_excluded(site, "Charizard Premium Collection") is True
     assert title_excluded(site, "Journey Together Elite Trainer Box") is False
+
+
+def test_adapter_default_title_filters_merge_with_site_config():
+    adapter = PackFreshAdapter()
+    site = SimpleNamespace(title_exclude_keywords=["custom blocker", "tin"])
+
+    merged = adapter.title_exclude_keywords(site)
+
+    assert "premium collection" in merged
+    assert "custom blocker" in merged
+    assert merged.count("tin") == 1
+
+
+def test_flipside_adapter_forces_html_fallback():
+    adapter = FlipsideGamingAdapter()
+    site = SimpleNamespace(shopify_js_fallback=True)
+    assert adapter.shopify_js_enabled(site) is False
+
+
+def test_generic_base_supports_postprocessing_hooks():
+    adapter = BaseGenericShopifySiteAdapter()
+    assert adapter.postprocess_discovered_urls(["a", "b"]) == ["a", "b"]

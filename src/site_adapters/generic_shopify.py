@@ -23,9 +23,88 @@ logger = logging.getLogger(__name__)
 
 class BaseGenericShopifySiteAdapter(BaseSiteAdapter):
     adapter_name = ""
+    default_title_exclude_keywords: tuple[str, ...] = ()
+    force_shopify_js_fallback: bool | None = None
 
     def supports(self, site) -> bool:
         return getattr(site, "adapter", "").strip().lower() == self.adapter_name
+
+    def collection_pages(self, site) -> List[str]:
+        return list(getattr(site, "collection_pages", []) or [])
+
+    def max_collection_pages(self, site) -> int:
+        return int(getattr(site, "max_collection_pages", 1))
+
+    def title_exclude_keywords(self, site) -> List[str]:
+        configured = [keyword for keyword in (getattr(site, "title_exclude_keywords", []) or []) if keyword]
+        merged = list(dict.fromkeys([*self.default_title_exclude_keywords, *configured]))
+        return merged
+
+    def shopify_js_enabled(self, site) -> bool:
+        if self.force_shopify_js_fallback is not None:
+            return bool(self.force_shopify_js_fallback)
+        return bool(getattr(site, "shopify_js_fallback", False))
+
+    def should_skip_title(self, site, title: str) -> bool:
+        site_like = type("SiteLike", (), {"title_exclude_keywords": self.title_exclude_keywords(site)})()
+        return title_excluded(site_like, title)
+
+    def postprocess_discovered_urls(self, urls: List[str]) -> List[str]:
+        return urls
+
+    def resolve_title_and_offer(self, context: ScrapeContext, url: str):
+        title = ""
+        price = None
+        in_stock = None
+        notes = ""
+        js = None
+        soup = None
+        site = context.site
+
+        if self.shopify_js_enabled(site):
+            try:
+                js = fetch_shopify_js_variants(context.fetcher, url)
+                title = str(js.get("title", "")).strip() or title
+                notes = "shopify_js"
+            except Exception as exc:
+                notes = f"shopify_js_failed:{exc}"
+                js = None
+
+        if not title or js is None:
+            response = context.fetcher.get(url)
+            soup = BeautifulSoup(response.text, "lxml")
+            if not title:
+                heading = soup.select_one("h1")
+                title = heading.get_text(strip=True) if heading else url
+
+        if js is not None:
+            price, in_stock = derive_variant_offer(js.get("variants") or [])
+
+        if price is None or in_stock is None:
+            if soup is None:
+                response = context.fetcher.get(url)
+                soup = BeautifulSoup(response.text, "lxml")
+            if price is None:
+                price_node = soup.select_one(
+                    "span.price-item--sale, span.price-item--regular, .price__regular .price-item, .price .money, [data-product-price]"
+                )
+                price = parse_price(price_node.get_text(" ", strip=True) if price_node else "")
+            if in_stock is None:
+                in_stock = "sold out" not in soup.get_text(" ", strip=True).lower()
+
+        return title, price, in_stock, notes, js, soup
+
+    def build_row(self, context: ScrapeContext, rule, title: str, url: str, price, in_stock, notes: str):
+        return build_standard_row(
+            site=context.site,
+            run_ts=context.run_ts,
+            title=title,
+            rule=rule,
+            product_url=url,
+            price=price,
+            in_stock=in_stock,
+            notes=notes,
+        )
 
     def scrape(self, context: ScrapeContext) -> SiteScrapeResult:
         site = context.site
@@ -38,18 +117,18 @@ class BaseGenericShopifySiteAdapter(BaseSiteAdapter):
         keyword_hits_but_filtered = 0
         unknown_product_type = 0
 
-        for collection_url in site.collection_pages:
+        for collection_url in self.collection_pages(site):
             discovered_urls.extend(
                 discover_product_urls(
                     fetcher=context.fetcher,
                     site=site,
                     collection_url=collection_url,
-                    max_pages=site.max_collection_pages,
+                    max_pages=self.max_collection_pages(site),
                     max_urls_per_site=context.max_urls_per_site,
                 )
             )
 
-        discovered_urls = list(dict.fromkeys(discovered_urls))
+        discovered_urls = self.postprocess_discovered_urls(list(dict.fromkeys(discovered_urls)))
         if context.max_products:
             discovered_urls = discovered_urls[:context.max_products]
 
@@ -60,31 +139,9 @@ class BaseGenericShopifySiteAdapter(BaseSiteAdapter):
             print(f"[HB] [{site.name}] {processed_urls}/{total} {url}")
             time.sleep(site.throttle_seconds)
             try:
-                title = ""
-                price = None
-                in_stock = None
-                notes = ""
-                js = None
+                title, price, in_stock, notes, _js, _soup = self.resolve_title_and_offer(context, url)
 
-                if site.shopify_js_fallback:
-                    try:
-                        js = fetch_shopify_js_variants(context.fetcher, url)
-                        title = str(js.get("title", "")).strip() or title
-                        notes = "shopify_js"
-                    except Exception as exc:
-                        notes = f"shopify_js_failed:{exc}"
-                        js = None
-
-                if not title or js is None:
-                    response = context.fetcher.get(url)
-                    soup = BeautifulSoup(response.text, "lxml")
-                    if not title:
-                        heading = soup.select_one("h1")
-                        title = heading.get_text(strip=True) if heading else url
-                else:
-                    soup = None
-
-                if title_excluded(site, title):
+                if self.should_skip_title(site, title):
                     keyword_hits_but_filtered += 1
                     near_misses.append({
                         "site_name": site.name,
@@ -105,21 +162,6 @@ class BaseGenericShopifySiteAdapter(BaseSiteAdapter):
                 if not rule:
                     continue
 
-                if js is not None:
-                    price, in_stock = derive_variant_offer(js.get("variants") or [])
-
-                if price is None or in_stock is None:
-                    if soup is None:
-                        response = context.fetcher.get(url)
-                        soup = BeautifulSoup(response.text, "lxml")
-                    if price is None:
-                        price_node = soup.select_one(
-                            "span.price-item--sale, span.price-item--regular, .price__regular .price-item, .price .money, [data-product-price]"
-                        )
-                        price = parse_price(price_node.get_text(" ", strip=True) if price_node else "")
-                    if in_stock is None:
-                        in_stock = "sold out" not in soup.get_text(" ", strip=True).lower()
-
                 if rule.allowed_product_types and base_product_type not in rule.allowed_product_types:
                     keyword_hits_but_filtered += 1
                     near_misses.append({
@@ -130,18 +172,7 @@ class BaseGenericShopifySiteAdapter(BaseSiteAdapter):
                     })
                     continue
 
-                rows.append(
-                    build_standard_row(
-                        site=site,
-                        run_ts=context.run_ts,
-                        title=title,
-                        rule=rule,
-                        product_url=url,
-                        price=price,
-                        in_stock=in_stock,
-                        notes=notes,
-                    )
-                )
+                rows.append(self.build_row(context, rule, title, url, price, in_stock, notes))
                 matched_rows += 1
             except Exception as exc:
                 logger.exception("Failed scraping %s (%s): %s", site.name, url, exc)
