@@ -21,8 +21,8 @@ from src.utils import parse_price
 logger = logging.getLogger(__name__)
 
 
-class GenericShopifyCollectionAdapter(BaseSiteAdapter):
-    adapter_name = "shopify_collection"
+class BaseGenericShopifySiteAdapter(BaseSiteAdapter):
+    adapter_name = ""
 
     def supports(self, site) -> bool:
         return getattr(site, "adapter", "").strip().lower() == self.adapter_name
@@ -164,3 +164,7 @@ class GenericShopifyCollectionAdapter(BaseSiteAdapter):
             },
             near_misses=near_misses,
         )
+
+
+class GenericShopifyCollectionAdapter(BaseGenericShopifySiteAdapter):
+    adapter_name = "shopify_collection"

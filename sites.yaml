@@ -28,7 +28,7 @@ sites:
 
   - name: "Dots Card Shop"
     mode: "shopify_collection"
-    adapter: "shopify_collection"
+    adapter: "dots"
     shopify_js_fallback: true
     throttle_seconds: 2.2
     currency: "USD"
@@ -40,7 +40,7 @@ sites:
 
   - name: "Grandads Cards"
     mode: "shopify_collection"
-    adapter: "shopify_collection"
+    adapter: "grandads"
     shopify_js_fallback: true
     throttle_seconds: 2.2
     currency: "USD"
@@ -52,7 +52,7 @@ sites:
 
   - name: "Safari Zone"
     mode: "shopify_collection"
-    adapter: "shopify_collection"
+    adapter: "safari_zone"
     shopify_js_fallback: true
     throttle_seconds: 2.0
     currency: "USD"
@@ -64,7 +64,7 @@ sites:
 
   - name: "TCG Stadium"
     mode: "shopify_collection"
-    adapter: "shopify_collection"
+    adapter: "tcg_stadium"
     shopify_js_fallback: true
     throttle_seconds: 2.0
     currency: "USD"
@@ -77,7 +77,7 @@ sites:
 
   - name: "Flipside Gaming"
     mode: "shopify_collection"
-    adapter: "shopify_collection"
+    adapter: "flipside_gaming"
     shopify_js_fallback: false
     throttle_seconds: 2.0
     currency: "USD"
@@ -90,7 +90,7 @@ sites:
 
   - name: "PokemonPlug"
     mode: "shopify_collection"
-    adapter: "shopify_collection"
+    adapter: "pokemon_plug"
     shopify_js_fallback: true
     throttle_seconds: 2.0
     currency: "USD"
@@ -103,7 +103,7 @@ sites:
 
   - name: "Pack Fresh"
     mode: "shopify_collection"
-    adapter: "shopify_collection"
+    adapter: "pack_fresh"
     shopify_js_fallback: true
     throttle_seconds: 2.2
     currency: "USD"
@@ -131,7 +131,7 @@ sites:
 
   - name: "Nova Break"
     mode: "shopify_collection"
-    adapter: "shopify_collection"
+    adapter: "nova_break"
     shopify_js_fallback: true
     throttle_seconds: 2.2
     currency: "USD"

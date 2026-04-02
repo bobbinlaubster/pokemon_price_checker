@@ -2,10 +2,18 @@ from pathlib import Path
 from types import SimpleNamespace
 
 from src.config import load_config
+from src.site_adapters.dots import DotsAdapter
+from src.site_adapters.flipside_gaming import FlipsideGamingAdapter
 from src.site_adapters.generic_shopify import GenericShopifyCollectionAdapter
+from src.site_adapters.grandads import GrandadsAdapter
+from src.site_adapters.nova_break import NovaBreakAdapter
+from src.site_adapters.pack_fresh import PackFreshAdapter
+from src.site_adapters.pokemon_plug import PokemonPlugAdapter
 from src.site_adapters.registry import get_site_adapter
+from src.site_adapters.safari_zone import SafariZoneAdapter
 from src.site_adapters.sakuras import SakurasAdapter
 from src.site_adapters.shopify_helpers import derive_variant_offer, discover_product_urls, title_excluded
+from src.site_adapters.tcg_stadium import TCGStadiumAdapter
 
 
 class FakeResponse:
@@ -38,15 +46,38 @@ def test_load_config_supports_explicit_adapter():
     nova = next(site for site in cfg.sites if site.name == "Nova Break")
 
     assert sakuras.adapter == "sakuras"
-    assert nova.adapter == "shopify_collection"
+    assert nova.adapter == "nova_break"
 
 
-def test_registry_returns_expected_adapter_classes():
+def test_registry_returns_expected_adapter_classes_for_sample_sites():
     sakuras_site = SimpleNamespace(adapter="sakuras", mode="shopify_collection")
+    dots_site = SimpleNamespace(adapter="dots", mode="shopify_collection")
+    pack_fresh_site = SimpleNamespace(adapter="pack_fresh", mode="shopify_collection")
     generic_site = SimpleNamespace(adapter="shopify_collection", mode="shopify_collection")
 
     assert isinstance(get_site_adapter(sakuras_site), SakurasAdapter)
+    assert isinstance(get_site_adapter(dots_site), DotsAdapter)
+    assert isinstance(get_site_adapter(pack_fresh_site), PackFreshAdapter)
     assert isinstance(get_site_adapter(generic_site), GenericShopifyCollectionAdapter)
+
+
+def test_all_configured_sites_have_site_specific_adapters():
+    cfg = load_config("sites.yaml")
+    expected_classes = {
+        "Sakuras Card Shop": SakurasAdapter,
+        "Dots Card Shop": DotsAdapter,
+        "Grandads Cards": GrandadsAdapter,
+        "Safari Zone": SafariZoneAdapter,
+        "TCG Stadium": TCGStadiumAdapter,
+        "Flipside Gaming": FlipsideGamingAdapter,
+        "PokemonPlug": PokemonPlugAdapter,
+        "Pack Fresh": PackFreshAdapter,
+        "Nova Break": NovaBreakAdapter,
+    }
+
+    for site in cfg.sites:
+        adapter = get_site_adapter(site)
+        assert isinstance(adapter, expected_classes[site.name])
 
 
 def test_discover_product_urls_deduplicates_and_absolutizes():
