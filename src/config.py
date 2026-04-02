@@ -9,7 +9,7 @@ class GlobalSettings:
     max_retries: int
     user_agents: List[str]
 
-    # NEW: etiquette + stability defaults
+    # Etiquette + stability defaults
     respect_robots_txt: bool
     cache_ttl_seconds: int
     max_urls_per_site: int
@@ -35,6 +35,9 @@ class SiteConfig:
     collection_pages: List[str]
     max_collection_pages: int
 
+    # Optional product-title blocklist to reduce noisy sealed-adjacent results.
+    title_exclude_keywords: List[str]
+
     # Shipping model (optional)
     shipping: ShippingRule
 
@@ -59,7 +62,6 @@ def load_config(path: str) -> AppConfig:
         timeout_seconds=int(_get(g, "timeout_seconds", 25)),
         max_retries=int(_get(g, "max_retries", 3)),
         user_agents=list(_get(g, "user_agents", [])) or ["Mozilla/5.0"],
-
         respect_robots_txt=bool(_get(g, "respect_robots_txt", True)),
         cache_ttl_seconds=int(_get(g, "cache_ttl_seconds", 900)),
         max_urls_per_site=int(_get(g, "max_urls_per_site", 250)),
@@ -77,6 +79,11 @@ def load_config(path: str) -> AppConfig:
                 shopify_js_fallback=bool(_get(s, "shopify_js_fallback", False)),
                 collection_pages=list(_get(s, "collection_pages", [])),
                 max_collection_pages=int(_get(s, "max_collection_pages", 3)),
+                title_exclude_keywords=[
+                    str(keyword).strip().lower()
+                    for keyword in (_get(s, "title_exclude_keywords", []) or [])
+                    if str(keyword).strip()
+                ],
                 shipping=ShippingRule(
                     type=str(_get(ship, "type", "unknown")),
                     flat_amount=ship.get("flat_amount"),

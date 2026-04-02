@@ -26,6 +26,12 @@ def _is_case_variant(name: str) -> bool:
     return any(k in n for k in CASE_KEYWORDS)
 
 
+def _title_excluded(site, title: str) -> bool:
+    title_l = (title or "").lower()
+    blocked = getattr(site, "title_exclude_keywords", []) or []
+    return any(keyword in title_l for keyword in blocked)
+
+
 def _apply_shipping(site, price: Optional[float]) -> Optional[float]:
     if price is None:
         return None
@@ -224,7 +230,16 @@ def scrape_site(
                     h1 = soup.select_one("h1")
                     title = h1.get_text(strip=True) if h1 else url
 
-            # Language filter
+            if _title_excluded(site, title):
+                keyword_hits_but_filtered += 1
+                near_misses.append({
+                    "site_name": site.name,
+                    "title": title,
+                    "reason": "filtered_by_site_title_keyword",
+                    "url": url,
+                })
+                continue
+
             if not is_allowed_language(title):
                 continue
 
@@ -264,7 +279,6 @@ def scrape_site(
                 matched_rows += len(final_variant_rows)
                 continue
 
-            # Cheapest available non-case variant for other shops
             if js is not None:
                 variants = js.get("variants") or []
                 prices: List[Tuple[bool, float]] = []

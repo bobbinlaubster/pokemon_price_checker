@@ -149,6 +149,22 @@ sites:
     shipping:
       type: "unknown"
 
+    title_exclude_keywords:
+      - "premium collection"
+      - "ultra premium"
+      - "super premium"
+      - "collection box"
+      - "figure collection"
+      - "binder collection"
+      - "playmat collection"
+      - "starter deck"
+      - "battle deck"
+      - "theme deck"
+      - "tin"
+      - "mini tin"
+      - "accessory pouch"
+      - "surprise box"
+
     collection_pages:
       - "https://pack-fresh.com/collections/pokemon"
       - "https://pack-fresh.com/collections/one-piece"
@@ -167,7 +183,24 @@ sites:
     shipping:
       type: "unknown"
 
+    title_exclude_keywords:
+      - "premium collection"
+      - "ultra premium"
+      - "super premium"
+      - "collection box"
+      - "figure collection"
+      - "binder collection"
+      - "playmat collection"
+      - "starter deck"
+      - "battle deck"
+      - "theme deck"
+      - "deck"
+      - "tin"
+      - "mini tin"
+      - "accessory pouch"
+      - "surprise box"
+
     collection_pages:
-      - "https://novabreak.com/collections/trading-card-games"
+      - "https://novabreak.com/collections/pokemon"
       - "https://novabreak.com/collections/one-piece"
     max_collection_pages: 3
